@@ -1,19 +1,19 @@
 <?php
 	class contest
 	{
-		var $name_site;
-		var $img_site;
-		var $name_contest;
-		var $date_start;
-		var $date_end;
-		var $description;
-		contest($a, $b, $c, $d, $e, $f, $g)
+		public $name_site;
+		public $img_site;
+		public $name_contest;
+		public $date_start;
+		public $date_end;
+		public $description;
+		function __construct($a, $b, $c, $d, $e, $f)
 		{
-			$name_site = $a;
-			$img_site = $b;
-			$name_contest = $c;
-			$date_start = $d;
-			$date_end = $e;
-			$description = $f;
+			$this->name_site     = $a;
+			$this->img_site      = $b;
+			$this->name_contest  = $c;
+			$this->date_start    = $d;
+			$this->date_end      = $e;
+			$this->description   = $f;
 		}
 	}
