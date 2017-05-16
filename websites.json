@@ -1,8 +1,7 @@
 {
-	"num" : 2,
 	"sites" :
 	{
-		"site0" : "controllers/c_hackerrank.php",
-		"site1" : "controllers/c_codechef.php"
+		"HackerRank" : "controllers/c_hackerrank.php",
+		"CodeChef"   : "controllers/c_codechef.php"
 	} 
 }
