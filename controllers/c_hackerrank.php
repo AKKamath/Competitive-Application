@@ -1,6 +1,6 @@
 <?php
 	// Include the class that we create objects of
-	require("../models/m_contest.php");
+	require_once("../models/m_contest.php");
 	
 	// Begin scraping
 	scrape_hackerrank();
@@ -52,7 +52,7 @@
 			preg_match("/og:description' content='([^']*?)'/", $n_file, $details);
 			
 			// Add details to array
-			$arr[] = new contest("HackerRank", "", $title[1], $date_start[1], $date_end[1], $details[1]);		
+			$arr[] = new contest("HackerRank", "/images/HackerRankImg.png", $title[1], $date_start[1], $date_end[1], $details[1], "https://www.hackerrank.com" . $match);		
 		}
 		
 		// No details found!

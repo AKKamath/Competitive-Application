@@ -4,15 +4,19 @@
 		exit;
 	
 	$details = json_decode($file, true);
-	for($i = 0; $i < 1/*$details['num']*/; ++$i)
+	$contests = [];
+	foreach($details['sites'] as $site_name => $site)
 	{
-		$site = $details['sites']['site' . (string)$i];
 		ob_start();		
-		require("../" . $site);
-		$result = json_decode(ob_get_clean(), true);
-		if(!strcmp($result, "INV"))
+		include("../" . $site);
+		$t_contests = json_decode(ob_get_clean(), true);
+		
+		if(empty($t_contests) || (is_string($t_contests) && !strcmp($t_contests, "INV")))
 		{
-			echo $details['sites']['site' . (string)$i] . " needs updating.";
+			echo $site_name . " needs updating.";
+			continue;
 		}
+		$contests = array_merge($contests, $t_contests);
 	}
+	require("../views/v_tabular.php");
 ?>
