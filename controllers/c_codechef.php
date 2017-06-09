@@ -21,7 +21,7 @@
 		$site_data = $site_data[0];
 
 		// Check for errors, and grab webpage of individual competitions
-		if(!preg_match_all("/<a href=\"(.*?)\"[^>]*>View Details/", $site_data, $matches))
+		if(!preg_match_all("/<a href=\"(.*?)\"[^>]*>/", $site_data, $matches))
 		{
 			echo json_encode("INV");
 			return;
@@ -31,15 +31,14 @@
 		foreach ($matches[1] as $match)
 		{
 			// Pull details of competition
-			$n_file = file_get_contents("https://www.hackerrank.com" . $match);
-
+			$n_file = file_get_contents("https://www.codechef.com/api/contests/" . $match);
 			// Grab title
-			preg_match("/h1[^>]*>(.*?)</", $n_file, $title);
+			preg_match("/\"name\":\"([^\"]*)\"/", $n_file, $title);
 			if(empty($title))
 			{
 				continue;
 			}
-
+			echo $title;
 			// Grab start date
 			preg_match("/starttime.setUTCSeconds\((.*?)\)/", $n_file, $date_start);
 			if(empty($title))
