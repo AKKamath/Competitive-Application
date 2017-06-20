@@ -9,7 +9,7 @@
 	{
 		// Pull data for all contests
 		$site_data = file_get_contents("https://www.codechef.com/contests");
-	
+		
 		// Error, website not found
 		if(empty($site_data))
 		{
@@ -26,10 +26,12 @@
 			echo json_encode("INV");
 			return;
 		}
-
+		preg_match_all("/<td data-starttime=\"(.*?)\"/", $site_data, $dates_start);
+		preg_match_all("/<td data-endtime=\"(.*?)\"/", $site_data, $dates_end);
 		// Iterate through competitions
-		foreach ($matches[1] as $match)
+		for ($i = 0; $i < count($matches[1]); $i = $i + 1)
 		{
+			$match = $matches[1][$i];
 			// Pull details of competition
 			$n_file = file_get_contents("https://www.codechef.com/api/contests/" . $match);
 			// Grab title
@@ -38,22 +40,11 @@
 			{
 				continue;
 			}
-			echo $title;
-			// Grab start date
-			preg_match("/starttime.setUTCSeconds\((.*?)\)/", $n_file, $date_start);
-			if(empty($title))
-			{
-				continue;
-			}
-
-			// Grab end date
-			preg_match("/endtime.setUTCSeconds\((.*?)\)/", $n_file, $date_end);
-			
 			// Grab contest details
 			preg_match("/og:description' content='([^']*?)'/", $n_file, $details);
 			
 			// Add details to array
-			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $title[1], $date_start[1], $date_end[1], $details[1], "https://www.codechef.com" . $match);		
+			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $title[1], strtotime($dates_start[1][$i]), strtotime($dates_end[1][$i]), $details, "https://www.codechef.com" . $match);		
 		}
 		
 		// No details found!
