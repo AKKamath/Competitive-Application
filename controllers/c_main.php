@@ -2,7 +2,10 @@
 	$file = file_get_contents("../websites.json");
 	if(empty($file))
 		exit;
-	
+	function cmp($a, $b)
+	{
+		return $a['date_start'] > $b['date_start'];
+	}
 	$details = json_decode($file, true);
 	$contests = [];
 	foreach($details['sites'] as $site_name => $site)
@@ -18,5 +21,6 @@
 		}
 		$contests = array_merge($contests, $t_contests);
 	}
+	usort($contests, "cmp");
 	require("../views/v_tabular.php");
 ?>
