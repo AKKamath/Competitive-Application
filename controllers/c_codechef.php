@@ -17,34 +17,25 @@
 			return;
 		}
 		
-		preg_match("/<tbody>([\s\S]*?)<\/tbody>/", $site_data, $site_data);
-		$site_data = $site_data[0];
-
+		preg_match_all("/<tbody>([\s\S]*?)<\/tbody>/", $site_data, $site_data);
+		$site_data = $site_data[0][0] . $site_data[0][1];
+		
 		// Check for errors, and grab webpage of individual competitions
 		if(!preg_match_all("/<a href=\"(.*?)\"[^>]*>/", $site_data, $matches))
 		{
 			echo json_encode("INV");
 			return;
 		}
+		// Grab title and dates
+		preg_match_all("/<a href=[^>]*>(.*?)<\/a>/", $site_data, $name);
 		preg_match_all("/<td data-starttime=\"(.*?)\"/", $site_data, $dates_start);
 		preg_match_all("/<td data-endtime=\"(.*?)\"/", $site_data, $dates_end);
 		// Iterate through competitions
 		for ($i = 0; $i < count($matches[1]); $i = $i + 1)
 		{
 			$match = $matches[1][$i];
-			// Pull details of competition
-			$n_file = file_get_contents("https://www.codechef.com/api/contests/" . $match);
-			// Grab title
-			preg_match("/\"name\":\"([^\"]*)\"/", $n_file, $title);
-			if(empty($title))
-			{
-				continue;
-			}
-			// Grab contest details
-			preg_match("/og:description' content='([^']*?)'/", $n_file, $details);
-			
 			// Add details to array
-			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $title[1], strtotime($dates_start[1][$i]), strtotime($dates_end[1][$i]), $details, "https://www.codechef.com" . $match);		
+			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $title[1], strtotime($dates_start[1][$i]), strtotime($dates_end[1][$i]), "Click link to view details", "https://www.codechef.com" . $match);		
 		}
 		
 		// No details found!
