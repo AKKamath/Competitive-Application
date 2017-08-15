@@ -1,5 +1,11 @@
 <?php
 	$file = file_get_contents("../websites.json");
+	$test = file_get_contents("http://www.google.com");
+	if(empty($test))
+	{
+		echo "Internet is down.";
+		exit;
+	}
 	if(empty($file))
 		exit;
 	function cmp($a, $b)
