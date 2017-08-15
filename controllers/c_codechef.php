@@ -35,7 +35,7 @@
 		{
 			$match = $matches[1][$i];
 			// Add details to array
-			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $title[1], strtotime($dates_start[1][$i]), strtotime($dates_end[1][$i]), "Click link to view details", "https://www.codechef.com" . $match);		
+			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $name[1][$i], strtotime($dates_start[1][$i]), strtotime($dates_end[1][$i]), "Click link to view details", "https://www.codechef.com" . $match);		
 		}
 		
 		// No details found!
