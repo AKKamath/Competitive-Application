@@ -52,7 +52,7 @@
 			preg_match("/og:description' content='([^']*?)'/", $n_file, $details);
 			
 			// Add details to array
-			$arr[] = new contest("HackerRank", "/images/HackerRankImg.png", $title[1], $date_start[1], $date_end[1], $details[1], "https://www.hackerrank.com" . $match);		
+			$arr[] = new contest("HackerRank", "/images/HackerRankImg.png", $title[1], date("M d Y H:i:s", $date_start[1]), date("M d Y H:i:s", $date_end[1]), $details[1], "https://www.hackerrank.com" . $match);		
 		}
 		
 		// No details found!
