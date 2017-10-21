@@ -29,5 +29,12 @@
 				</div>
 			</tbody>
 		</table>
+        <script>
+            fetch('/contests.php')
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res);
+                });
+        </script>
 	</body>
 </html>

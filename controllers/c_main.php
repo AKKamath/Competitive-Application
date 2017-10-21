@@ -40,6 +40,6 @@
 	{
 		return $a['date_start'] > $b['date_start'];
 	}
-	
+
 	require("../views/v_tabular.php");
 ?>

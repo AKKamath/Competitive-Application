@@ -1,6 +1,6 @@
 <?php
 	// Include the class that we create objects of
-	require_once("../models/m_contest.php");
+	require_once(__DIR__ . "/../models/m_contest.php");
 	
 	// Begin scraping
 	scrape_hackerrank();
