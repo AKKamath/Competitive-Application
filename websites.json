@@ -3,6 +3,7 @@
         "HackerRank": "controllers/c_hackerrank.php",
         "CodeChef": "controllers/c_codechef.php",
         "Codeforces": "controllers/c_codeforces.php",
-        "AtCoder": "controllers/c_atcoder.php"
+        "AtCoder": "controllers/c_atcoder.php",
+        "UriOnlineJudge": "controllers/c_urionlinejudge.php"
     }
 }
