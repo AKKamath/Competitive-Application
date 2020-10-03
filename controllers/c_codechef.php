@@ -1,6 +1,6 @@
 <?php
 	// Include the class that we create objects of
-	require_once("../models/m_contest.php");
+	require_once(__DIR__ . "/../models/m_contest.php");
 	
 	// Begin scraping
 	scrape_codechef();
@@ -35,7 +35,7 @@
 		{
 			$match = $matches[1][$i];
 			// Add details to array
-			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $name[1][$i], strtotime($dates_start[1][$i]), strtotime($dates_end[1][$i]), "Click link to view details", "https://www.codechef.com" . $match);		
+			$arr[] = new contest("CodeChef", "/images/CodeChef.jpg", $name[1][$i],  date("M d Y H:i:s", strtotime($dates_start[1][$i])), date("M d Y H:i:s", strtotime($dates_end[1][$i])), "Click link to view details", "https://www.codechef.com" . $match);		
 		}
 		
 		// No details found!
