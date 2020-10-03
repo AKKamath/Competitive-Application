@@ -16,4 +16,8 @@ fetch('/api/contests.php')
       });
 
       document.querySelector('#tab-data').innerHTML = html;
-  });
+  })
+  .catch(error => {
+    // handle the error
+    console.log(error);
+});

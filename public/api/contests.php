@@ -1,3 +1,3 @@
 <?php 
 
-require('../../controllers/c_contests.php');
+require(__DIR__ . '/../../controllers/c_contests.php');

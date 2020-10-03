@@ -14,12 +14,13 @@
             $t_contests = json_decode(ob_get_clean(), true);
             
             if(empty($t_contests) || (is_string($t_contests) && !strcmp($t_contests, "INV"))) {
-                echo $site_name . " needs updating.";
-                continue;
+                $t_contests = [];
+                $t_contests[] = (array)new contest($site_name, '', "Needs updating", date("M d Y H:i:s"), date("M d Y H:i:s"), '', "");
             }
             $contests = array_merge($contests, $t_contests);
         }
-        usort($contests, "cmp");
+        if(count($contests) > 1)
+            usort($contests, "cmp");
         if(!empty($contests)) {
             file_put_contents(__DIR__ . "/../cache.json", json_encode($contests));
         }
@@ -34,7 +35,7 @@
     
     function cmp($a, $b)
     {
-        return strtotime($a['date_start']) > strtotime($b['date_start']);
+        return strtotime($a['date_end']) > strtotime($b['date_end']);
     }
 
     echo json_encode($contests);
