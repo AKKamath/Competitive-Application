@@ -26,13 +26,13 @@
 		foreach ($matches[1] as $match)
 		{
 			preg_match("/data-contestId=\"(.*?)\"/", $match, $url);
-			preg_match("/<td>[\r\n]*([\S ]*)</", $match, $title);
+			preg_match("/<td>[\r\n]*([\S ]*)/", $match, $title);
 			preg_match("/\"format-time\"[^>]*?>(.*?)<\/span>/", $match, $date_start);
 			preg_match("/month=(.*?)&/", $match, $month);
 			$date_start = preg_replace("/^\w+/", $month[1], $date_start[1]);
 			// echo $date_start;
 			// Add details to array
-			$arr[] = new contest("CodeForces", "/images/CodeForces.png", $title[1], date("M d Y H:i:s", strtotime($date_start)), '', 'Click link to view details', "http://codeforces.com/contests/" . $url[1]);
+			$arr[] = new contest("CodeForces", "/images/CodeForces.png", $title[1], date("M d Y H:i:s", strtotime($date_start)), date("M d Y H:i:s", strtotime($date_start)), '', "http://codeforces.com/contests/" . $url[1]);
 		}
 
 		// No details found!

@@ -35,7 +35,7 @@
     
     function cmp($a, $b)
     {
-        return strtotime($a['date_start']) > strtotime($b['date_start']);
+        return strtotime($a['date_end']) > strtotime($b['date_end']);
     }
 
     echo json_encode($contests);
